@@ -62,8 +62,8 @@ class docker_tomcat_module(
   Hash $context_resourcelinks = {},
   Hash $context_valves = {},
   Hash $wars = {},
-  Hash $tomcat_libraries = {},
-  Hash $environment_vars = {},
+  Array $tomcat_libraries = [],
+  Array $environment_vars = [],
   String $user = 'tomcat_admin',
   String $group = 'tomcat',
 ) {

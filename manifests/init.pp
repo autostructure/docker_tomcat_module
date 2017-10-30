@@ -62,8 +62,13 @@ class docker_tomcat_module(
   Hash $context_resourcelinks = {},
   Hash $context_valves = {},
   Hash $wars = {},
-  ) {
-  class { '::docker_tomcat_module::install_java': }
+  Hash $tomcat_libraries = {},
+  Hash $environment_vars = {},
+  String $user = 'tomcat_admin',
+  String $group = 'tomcat',
+) {
+  class { '::docker_tomcat_module::pre_install': }
+  -> class { '::docker_tomcat_module::install_java': }
   -> class { '::docker_tomcat_module::install_tomcat': }
   -> class{ '::docker_tomcat_module::configure': }
   -> Class['::docker_tomcat_module']

@@ -9,6 +9,9 @@ fixtures:
   symlinks:
     docker_tomcat_module: "#{source_dir}"
 
+  repositories:
+    tomcat: https://github.com/autostructure/puppetlabs-tomcat.git
+
   forge_modules:
     cis_harden_tomcat:
       repo: autostructure-cis_harden_tomcat
@@ -16,9 +19,6 @@ fixtures:
     java:
       repo: puppetlabs-java
       ref: 2.1.0
-    tomcat:
-      repo: puppetlabs-tomcat
-      ref: 2.0.0
     stdlib:
       repo: puppetlabs-stdlib
       ref: 4.20.0

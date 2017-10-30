@@ -236,4 +236,25 @@ class docker_tomcat_module::configure {
       attributes_to_remove  => $values['attributes_to_remove'],
     }
   }
+
+  $docker_tomcat_module::tomcat_libraries.each | $tomcat_library | {
+    $tomcat_library_arr = $tomcat_library.split('/')
+    $filename = $tomcat_library_arr[-1]
+
+    file { "/usr/local/tomcat/lib/${filename}":
+      ensure => file,
+      source =>  $tomcat_library,
+      owner  => $docker_tomcat_module::user,
+      group  => $docker_tomcat_module::group,
+    }
+  }
+
+  $docker_tomcat_module::environment_vars.each | $value | {
+    file_line { "${value}_catalina":
+      ensure => present,
+      path   => '/usr/local/tomcat/bin/catalina.sh',
+      line   => "CATALINA_OPTS=\"-D${value}=\'\$${value}\' \$CATALINA_OPTS\"",
+      after  => '^PRGDIR\=.*',
+    }
+  }
 }

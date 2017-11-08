@@ -40,7 +40,7 @@
 # Copyright
 # ---------
 #
-# Copyright 2017 Your name here, unless otherwise noted.
+# Copyright 2017 Autostructure
 #
 class docker_tomcat_module(
   Hash $properties_properties = {},
@@ -61,9 +61,9 @@ class docker_tomcat_module(
   Hash $context_resources = {},
   Hash $context_resourcelinks = {},
   Hash $context_valves = {},
+  Hash $setenv_entries = {},
   Hash $wars = {},
   Array $tomcat_libraries = [],
-  Array $environment_vars = [],
   String $user = 'tomcat_admin',
   String $group = 'tomcat',
 ) {

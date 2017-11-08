@@ -17,7 +17,7 @@
       "version_requirement": ">= 2.0.0 < 3.0.0"
     },
     {
-      "name": "puppetlabs-tomcat",
+      "name": "autostructure-tomcat",
       "version_requirement": ">= 2.0.0 < 3.0.0"
     },
     {

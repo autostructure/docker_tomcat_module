@@ -249,12 +249,19 @@ class docker_tomcat_module::configure {
     }
   }
 
-  $docker_tomcat_module::environment_vars.each | $value | {
-    file_line { "${value}_catalina":
-      ensure => present,
-      path   => '/usr/local/tomcat/bin/catalina.sh',
-      line   => "CATALINA_OPTS=\"-D${value}=\'\$${value}\' \$CATALINA_OPTS\"",
-      after  => '^PRGDIR\=.*',
+  $docker_tomcat_module::environment_vars.each | String $key, Array $values | {
+    # file_line { "${value}_catalina":
+    #   ensure => present,
+    #   path   => '/usr/local/tomcat/bin/catalina.sh',
+    #   line   => "CATALINA_OPTS=\"-D${value}=\'\$${value}\' \$CATALINA_OPTS\"",
+    #   after  => '^PRGDIR\=.*',
+    # }
+    tomcat::setenv::entry { $key:
+      ensure      => present,
+      user        => $docker_tomcat_module::user,
+      group       => $docker_tomcat_module::group,
+      config_file => '/usr/local/tomcat/bin/setenv.sh',
+      value       => $values,
     }
   }
 }

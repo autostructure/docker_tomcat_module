@@ -254,7 +254,7 @@ class docker_tomcat_module::configure {
       ensure => present,
       path   => '/usr/local/tomcat/bin/catalina.sh',
       line   => "CATALINA_OPTS=\"-D${value}=\'\$${value}\' \$CATALINA_OPTS\"",
-      after  => '^PRGDIR\=.*',
+      after  => '^# ----- Execute The Requested Command .+',
     }
   }
 

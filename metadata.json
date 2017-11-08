@@ -1,6 +1,6 @@
 {
   "name": "autostructure-docker_tomcat_module",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "author": "autostructure",
   "summary": "Contains the logic necessary to install and configure a tomcat container.",
   "license": "Apache-2.0",

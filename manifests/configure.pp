@@ -1,7 +1,7 @@
 # Configure the Tomcat build
 class docker_tomcat_module::configure {
   $docker_tomcat_module::wars.each | String $war, Hash $values | {
-    tomcat_application  { $values['war_name']:
+    tomcat_application  { $war:
       catalina_base      => $values['catalina_base'],
       application_name   => $war,
       application_source => $values['war_source'],

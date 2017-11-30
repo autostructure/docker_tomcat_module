@@ -1,15 +1,12 @@
 # Configure the Tomcat build
 class docker_tomcat_module::configure {
   $docker_tomcat_module::wars.each | String $war, Hash $values | {
-    ::tomcat::war { $war:
-      catalina_base   => $values['catalina_base'],
-      app_base        => $values['app_base'],
-      deployment_path => $values['deployment_path'],
-      war_ensure      => $values['war_ensure'],
-      war_name        => $values['war_name'],
-      war_purge       => $values['war_purge'],
-      war_source      => $values['war_source'],
-      allow_insecure  => $values['allow_insecure'],
+    tomcat_application  { $values['war_name']:
+      catalina_base      => $values['catalina_base'],
+      application_name   => $war,
+      application_source => $values['war_source'],
+      user               => $docker_tomcat_module::user,
+      group              => $docker_tomcat_module::group,
     }
   }
 

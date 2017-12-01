@@ -16,4 +16,25 @@ class docker_tomcat_module::secure {
       group         => $docker_tomcat_module::group,
     }
   }
+
+  # Remove unneeded application_source
+  file { '/usr/local/tomcat/webapps/docs':
+    ensure => absent,
+    force  => true,
+  }
+
+  file { '/usr/local/tomcat/webapps/examples':
+    ensure => absent,
+    force  => true,
+  }
+
+  file { '/usr/local/tomcat/webapps/host-manager':
+    ensure => absent,
+    force  => true,
+  }
+
+  file { '/usr/local/tomcat/webapps/manager':
+    ensure => absent,
+    force  => true,
+  }
 }

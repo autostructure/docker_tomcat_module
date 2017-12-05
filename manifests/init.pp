@@ -69,8 +69,8 @@ class docker_tomcat_module(
   String $group = 'root',
 ) {
   #class { '::docker_tomcat_module::pre_install': }
-  # class { '::docker_tomcat_module::install_java': }
-  class { '::docker_tomcat_module::install_tomcat': }
+  class { '::docker_tomcat_module::install_java': }
+  -> class { '::docker_tomcat_module::install_tomcat': }
   -> class{ '::docker_tomcat_module::configure': }
   -> class{ '::docker_tomcat_module::secure': }
   -> Class['::docker_tomcat_module']

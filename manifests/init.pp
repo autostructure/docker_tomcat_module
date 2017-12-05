@@ -65,11 +65,11 @@ class docker_tomcat_module(
   Hash $wars = {},
   Array $tomcat_libraries = [],
   Array $environment_vars = [],
-  String $user = 'tomcat_admin',
-  String $group = 'tomcat',
+  String $user = 'root',
+  String $group = 'root',
 ) {
-  class { '::docker_tomcat_module::pre_install': }
-  -> class { '::docker_tomcat_module::install_java': }
+  #class { '::docker_tomcat_module::pre_install': }
+  class { '::docker_tomcat_module::install_java': }
   -> class { '::docker_tomcat_module::install_tomcat': }
   -> class{ '::docker_tomcat_module::configure': }
   -> class{ '::docker_tomcat_module::secure': }

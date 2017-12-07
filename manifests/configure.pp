@@ -264,9 +264,8 @@ class docker_tomcat_module::configure {
   $docker_tomcat_module::environment_vars.each | String $value | {
     file_line { "${value}_catalina":
       ensure => present,
-      path   => '/usr/local/tomcat/bin/catalina.sh',
+      path   => '/usr/local/tomcat/bin/setenv.sh',
       line   => "CATALINA_OPTS=\"-D${value}=\'\$${value}\' \$CATALINA_OPTS\"",
-      after  => '^# ----- Execute The Requested Command .+',
     }
   }
 

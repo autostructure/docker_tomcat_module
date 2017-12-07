@@ -233,13 +233,29 @@ class docker_tomcat_module::configure {
     }
   }
 
+  # We are moving the libraries to another directory. That way they
+  # can be moved over to the "docker tomcat" image individually.
+  # We don't want to include hte libraries built into our tomcat.
+  file { '/usr/local/tomcat/ext_lib':
+    ensure => directory,
+    owner  => $docker_tomcat_module::user,
+    group  => $docker_tomcat_module::group,
+  }
+
   $docker_tomcat_module::tomcat_libraries.each | $tomcat_library | {
     $tomcat_library_arr = $tomcat_library.split('/')
     $filename = $tomcat_library_arr[-1]
 
+    file { "/usr/local/tomcat/ext_lib/${filename}":
+      ensure => file,
+      source => $tomcat_library,
+      owner  => $docker_tomcat_module::user,
+      group  => $docker_tomcat_module::group,
+    }
+
     file { "/usr/local/tomcat/lib/${filename}":
       ensure => file,
-      source =>  $tomcat_library,
+      source => $tomcat_library,
       owner  => $docker_tomcat_module::user,
       group  => $docker_tomcat_module::group,
     }
